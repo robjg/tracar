@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Oddjob"/>
+                <sql expandProperties="true" name="Create Feed Trade Table">
+                    <connection>
+                        <value value="${vars.connection}"/>
+                    </connection>
+                    <input>
+                        <resource resource="${tracar.batch.schema.script}"/>/>
+                    </input>
+                </sql>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

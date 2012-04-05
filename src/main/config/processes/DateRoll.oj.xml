@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <bean class="tracar.dates.RollBusinessDateSpring"/>
+                <folder name="Useful Queries">
+                    <jobs>
+                        <sql expandProperties="true" name="Business Date Query">
+                            <connection>
+                                <connection driver="${tracar.db.driver}" password="${tracar.db.password}" url="${tracar.db.url}" username="${tracar.db.user}"/>
+                            </connection>
+                            <input>
+                                <buffer><![CDATA[select * from ${tracar.db.schema}.BUSINESS_DATE]]></buffer>
+                            </input>
+                            <results>
+                                <sql-results-sheet>
+                                    <output>
+                                        <logout/>
+                                    </output>
+                                </sql-results-sheet>
+                            </results>
+                        </sql>
+                    </jobs>
+                </folder>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

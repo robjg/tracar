@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <sequential name="Create Tables">
+                    <jobs>
+                        <sql expandProperties="true" name="Create CURRENCY Table">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/tables/CURRENCY.ddl"/>
+                            </input>
+                        </sql>
+                        <sql expandProperties="true" name="Create ACCOUNT Table">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/tables/ACCOUNT.ddl"/>
+                            </input>
+                        </sql>
+                        <sql expandProperties="true" name="Create PRODUCT Table">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/tables/PRODUCT.ddl"/>
+                            </input>
+                        </sql>
+                        <sql expandProperties="true" name="Create TRADE Table">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/tables/TRADE.ddl"/>
+                            </input>
+                        </sql>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

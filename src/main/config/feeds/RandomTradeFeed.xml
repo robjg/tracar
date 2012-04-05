@@ -1,0 +1,17 @@
+<oddjob id="this">
+	<job>
+		<sequential>
+			<jobs>
+				<bean class="tracar.source.random.RandomTradeFeed">
+					<seedTrades>
+						<is exchangeCode="XCME"
+							instrumentCode="ED"
+							periodCode="201202"
+							seedPrice="99.5"
+							maxPriceMovement="0.1"/>
+					</seedTrades>
+				</bean>
+			</jobs>
+		</sequential>
+	</job>
+</oddjob>

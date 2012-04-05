@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Data Source Setup"/>
+                <sql expandProperties="true" name="Create Schema">
+                    <connection>
+                        <value value="${dataSource.connection}"/>
+                    </connection>
+                    <input>
+                        <file file="${tracar.db.install.dir}/schema.ddl"/>
+                    </input>
+                </sql>
+                <oddjob file="${this.dir}/domain.oj.xml" name="Install Domain">
+                    <export>
+                        <value key="dataSource" value="${dataSource}"/>
+                    </export>
+                </oddjob>
+                <oddjob file="${this.dir}/dates.oj.xml" name="Install Dates">
+                    <export>
+                        <value key="dataSource" value="${dataSource}"/>
+                    </export>
+                </oddjob>
+                <oddjob file="${this.dir}/feeds.oj.xml" name="Install Feeds">
+                    <export>
+                        <value key="dataSource" value="${dataSource}"/>
+                    </export>
+                </oddjob>
+                <folder name="Utils">
+                    <jobs>
+                        <sql expandProperties="true" name="Drop">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/drop.ddl"/>
+                            </input>
+                        </sql>
+                        <oddjob file="${this.dir}/truncate.oj.xml" name="Truncate">
+                            <export>
+                                <value key="dataSource" value="${dataSource}"/>
+                            </export>
+                        </oddjob>
+                    </jobs>
+                </folder>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

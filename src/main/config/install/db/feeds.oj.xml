@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <sql expandProperties="true" name="Create Feed Trade Table">
+                    <connection>
+                        <value value="${dataSource.connection}"/>
+                    </connection>
+                    <input>
+                        <file file="${tracar.db.install.dir}/tables/FEED_TRADE.ddl"/>
+                    </input>
+                </sql>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    ">
+
+    <bean id="randomTradeSource" class="tracar.feeds.random.RandomTradeSource">
+        <property name="tradeDate" ref="tradeDate"/>
+        <property name="accounts">
+            <list>
+                <value>A10123</value>
+                <value>A10456</value>
+            </list>
+        </property>
+        <property name="seedTrades">
+            <list>
+                <bean class="tracar.feeds.random.SeedTradeBean">
+                    <property name="exchangeCode" value="FRUITEX" />
+                    <property name="securityType" value="FRUIT" />
+                    <property name="securityCode" value="APPLE" />
+                    <property name="seedPrice" value="99.5" />
+                    <property name="maxPriceMovement"
+                        value="1.5" />
+                </bean>
+                <bean class="tracar.feeds.random.SeedTradeBean">
+                    <property name="exchangeCode" value="FRUITEX" />
+                    <property name="securityType" value="FRUIT" />
+                    <property name="securityCode" value="ORANGE" />
+                    <property name="seedPrice" value="220.0" />
+                    <property name="maxPriceMovement"
+                        value="10" />
+                    <property name="priceScale" value="-1" />
+                </bean>
+            </list>
+        </property>
+        <property name="counterparties">
+            <list>
+                <value>TESCO</value>
+                <value>ALDI</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="itemReader" class="tracar.feeds.batch.TradeItemReader">
+        <property name="tradeSource">
+            <bean class="tracar.feeds.util.LimitingIterable">
+                <property name="limit" value="100"/>
+                <property name="limiting" ref="randomTradeSource"/>
+            </bean>
+        </property>
+    </bean>
+    
+</beans>

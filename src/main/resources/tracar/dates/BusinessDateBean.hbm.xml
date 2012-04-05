@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="tracar.dates">
+
+    <class name="BusinessDateBean" table="BUSINESS_DATE">
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id> 
+        
+        <property name="previous" type="date" column="PREVIOUS"/>
+        
+        <property name="current" type="date" column="CURRENT"/>
+
+        <property name="next" type="date" column="NEXT"/>        
+    </class>
+
+</hibernate-mapping>

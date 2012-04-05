@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="tracar.domain">
+
+    <class name="ProductBean" table="PRODUCT">
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id> 
+
+        <property name="type" column="TYPE"/>
+        
+        <property name="code" column="CODE"/>
+        
+        <property name="description" column="DESCRIPTION"/>
+                
+        <many-to-one name="currency" class="CurrencyBean"
+                    column="CURRENCY_ID" />
+    </class>
+
+</hibernate-mapping>

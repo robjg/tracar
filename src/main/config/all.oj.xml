@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Configuration"/>
+                <oddjob file="${this.dir}/all_.oj.xml" id="main" name="All Tasks">
+                    <classLoader>
+                        <value value="${globalVars.tracarClassLoader}"/>
+                    </classLoader>
+                </oddjob>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

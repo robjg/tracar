@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+  <context:property-placeholder location="classpath:tracar.properties" />
+
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    destroy-method="close">
+    <property name="driverClassName" value="${tracar.db.driver}" />
+    <property name="url" value="${tracar.db.url}" />
+    <property name="username" value="${tracar.db.user}" />
+    <property name="password" value="${tracar.db.password}" />
+  </bean>
+  
+  <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="configLocations">
+      <list>
+        <value>classpath:tracar/dates/Hibernate.cfg.xml</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">${tracar.hibernate.dialect}</prop>
+        <prop key="hibernate.default_schema">${tracar.db.schema}</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="loadBusinessDate" class="tracar.dates.BusinessDateLoader">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+
+</beans>

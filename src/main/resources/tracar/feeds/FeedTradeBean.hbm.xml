@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="tracar.feeds">
+
+    <class name="FeedTradeBean" table="FEED_TRADE">
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id> 
+        
+        <property name="sequenceNumber" column="SEQ_NUM"/>
+        
+        <property name="tradeRef" column="TRADE_REF"/>
+        
+        <property name="tradeDate" column="TRADE_DATE" type="date"/>
+        
+        <property name="accountCode" column="ACCOUNT_CODE"/>
+        
+        <property name="exchangeCode" column="EXCHANGE_CODE"/>
+        
+        <property name="productType" column="PRODUCT_TYPE"/>
+        
+        <property name="productCode" column="PRODUCT_CODE"/>
+        
+        <property name="side" column="SIDE"/>
+        
+        <property name="quantity" column="QUANTITY"/>
+        
+        <property name="tradePrice" column="TRADE_PRICE" type="double"/>
+        
+        <property name="counterpartyCode" column="COUNTERPARTY_CODE"/>
+                
+    </class>
+
+</hibernate-mapping>

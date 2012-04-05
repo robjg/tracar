@@ -1,0 +1,42 @@
+<oddjob>
+    <job>
+        <oddjob name="Execute SQL Oddjob" id="inner-oddjob">
+            <properties>
+                <properties>
+                    <input>
+                        <resource resource='tracar.properties' />
+                    </input>
+                </properties>
+            </properties>
+            <configuration>
+                <xml>
+                    <oddjob>
+                        <job>
+                            <sql expandProperties="true">
+                                <connection>
+                                    <connection driver='${tracar.db.driver}'
+                                        password='${tracar.db.password}'
+                                        url='${tracar.db.url}' username='${tracar.db.user}'/>
+                                </connection>
+                                <input>
+                                    <value value="${sql}"/>
+                                </input>
+                                <results>
+                                    <value value="${results}"/>
+                                </results>
+                            </sql>
+                        </job>
+                    </oddjob>
+                </xml>
+            </configuration>
+            <export>
+                <value key="sql" value="${sql}"/>
+                <identify id="results" key="results">
+                    <value>
+                        <sql-results-bean/>
+                    </value>
+                </identify>
+            </export>
+        </oddjob>
+    </job>
+</oddjob>

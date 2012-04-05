@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <folder>
+            <jobs>
+                <sequential name="Install Tracar">
+                    <jobs>
+                        <mkdir dir="${tracar.persist.dir}" name="Create Persist Dir"/>
+                        <oddjob file="${this.dir}/install/db/install-all.oj.xml" name="Install DB Oddjob"/>
+                    </jobs>
+                </sequential>
+                <oddjob file="${this.dir}/processes/DateRoll.oj.xml" id="date-roll" name="Date Roll">
+                    <persister>
+                        <file-persister dir="${tracar.persist.dir}"/>
+                    </persister>
+                </oddjob>
+                <oddjob file="${this.dir}/processes/PretendBroker.oj.xml" id="pretend-broker" name="Pretend Broker">
+                    <persister>
+                        <file-persister dir="${tracar.persist.dir}"/>
+                    </persister>
+                </oddjob>
+                <oddjob file="${this.dir}/processes/TradeFeed.oj.xml" id="trade-feed" name="Trade Feed">
+                    <persister>
+                        <file-persister dir="${tracar.persist.dir}"/>
+                    </persister>
+                </oddjob>
+                <oddjob file="${this.dir}/processes/TradeImport.oj.xml" id="trade-import" name="Trade Import">
+                    <export>
+                        <value key="trade-feed" value="${trade-feed/file-loader}"/>
+                    </export>
+                    <persister>
+                        <file-persister dir="${tracar.persist.dir}"/>
+                    </persister>
+                </oddjob>
+            </jobs>
+        </folder>
+    </job>
+</oddjob>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <sequential name="Create Tables">
+                    <jobs>
+                        <sql expandProperties="true" name="Create BUSINESS_DATE Table">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/tables/BUSINESS_DATE.ddl"/>
+                            </input>
+                        </sql>
+                        <sql expandProperties="true" name="Create HOLIDAY Table">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/tables/HOLIDAY.ddl"/>
+                            </input>
+                        </sql>
+                    </jobs>
+                </sequential>
+                <sequential name="Setup SQL">
+                    <jobs>
+                        <sql expandProperties="true" name="BUSINESS_DATE SQL">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/data/BUSINESS_DATE.sql"/>
+                            </input>
+                        </sql>
+                        <sql expandProperties="true" name="HOLIDAY SQL">
+                            <connection>
+                                <value value="${dataSource.connection}"/>
+                            </connection>
+                            <input>
+                                <file file="${tracar.db.install.dir}/data/HOLIDAY.sql"/>
+                            </input>
+                        </sql>
+                    </jobs>
+                </sequential>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

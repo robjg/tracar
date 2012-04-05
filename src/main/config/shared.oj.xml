@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <check name="Check tracar.home set" value="${tracar.home}"/>
+                <properties name="Load Tracar Properties File">
+                    <input>
+                        <resource resource="tracar.properties"/>
+                    </input>
+                </properties>
+                <properties name="Default Properties">
+                    <values>
+                        <file file="${tracar.home}" key="tracar.app"/>
+                        <file file="${tracar.app}/classes" key="tracar.classes.dir"/>
+                        <file file="${tracar.app}/lib" key="tracar.lib.dir"/>
+                        <file file="${tracar.home}/work" key="tracar.work.dir"/>
+                        <file file="${tracar.work.dir}/feeds" key="tracar.feed.dir"/>
+                        <file file="${tracar.home}/persist" key="tracar.persist.dir"/>
+                    </values>
+                </properties>
+                <variables id="globalVars">
+                    <tracarClassLoader>
+                        <url-class-loader>
+                            <files>
+                                <files>
+                                    <list>
+                                        <files files="${tracar.classes.dir}"/>
+                                        <files files="${tracar.lib.dir}/*.jar"/>
+                                    </list>
+                                </files>
+                            </files>
+                        </url-class-loader>
+                    </tracarClassLoader>
+                </variables>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

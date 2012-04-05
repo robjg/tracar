@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <scheduling:timer id="timer" skipMissedRuns="true" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+                    <schedule>
+                        <schedules:weekly from="monday" to="friday" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+                            <refinement>
+                                <schedules:daily from="07:00" to="19:00">
+                                    <refinement>
+                                        <schedules:interval interval="00:15"/>
+                                    </refinement>
+                                </schedules:daily>
+                            </refinement>
+                        </schedules:weekly>
+                    </schedule>
+                    <job>
+                        <sequential>
+                            <jobs>
+                                <bean class="tracar.dates.BusinessDateLoaderSpring" id="businessDate"/>
+                                <sequence from="1" id="seqnum" watch="${businessDate.current}"/>
+                                <variables id="vars">
+                                    <todayDate>
+                                        <format date="${businessDate.current}" format="yyyyMMdd"/>
+                                    </todayDate>
+                                    <sequence>
+                                        <format format="00000000" number="${seqnum.current}"/>
+                                    </sequence>
+                                    <fileName>
+                                        <file file="${tracar.feed.dir}/Trade-${vars.todayDate}-${vars.sequence}.txt"/>
+                                    </fileName>
+                                </variables>
+                                <bean class="tracar.feeds.SpringBatchLauncher">
+                                    <export>
+                                        <value key="tradeDate" value="${businessDate.current}"/>
+                                    </export>
+                                    <resources>
+                                        <list>
+                                            <values>
+                                                <value value="tracar/feeds/random/RandomTradeSource.spg.xml"/>
+                                                <value value="tracar/feeds/batch/TradeFeedFileWriter.spg.xml"/>
+                                                <value value="tracar/feeds/SpringBatchMain.spg.xml"/>
+                                            </values>
+                                        </list>
+                                    </resources>
+                                    <properties>
+                                        <properties>
+                                            <values>
+                                                <value key="tracar.feed.file.name" value="${vars.fileName}"/>
+                                            </values>
+                                        </properties>
+                                    </properties>
+                                </bean>
+                            </jobs>
+                        </sequential>
+                    </job>
+                </scheduling:timer>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

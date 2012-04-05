@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential name="Jobs">
+            <jobs>
+                <check name="Check Tracar Properties set" value="${tracar.db.schema}"/>
+                <variables id="dataSource">
+                    <connection>
+                        <connection driver="${tracar.db.driver}" password="${tracar.db.password}" url="${tracar.db.url}" username="${tracar.db.user}"/>
+                    </connection>
+                </variables>
+                <properties>
+                    <values>
+                        <file file="${this.dir}/${tracar.db.type}" key="tracar.db.install.dir"/>
+                    </values>
+                </properties>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

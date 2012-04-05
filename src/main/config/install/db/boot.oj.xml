@@ -1,0 +1,16 @@
+<oddjob id="this">
+  <job>
+    <sequential>
+      <jobs>
+        <check name="Check Something To Run" value="${this.args[0]}" />
+        <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED"
+          name="Shared Oddjob" />
+        <oddjob file="${this.dir}/${this.args[0]}.oj.xml">
+          <export>
+            <value key="dataSource" value="${dataSource}"/>
+          </export>
+        </oddjob>
+      </jobs>
+    </sequential>
+  </job>
+</oddjob>

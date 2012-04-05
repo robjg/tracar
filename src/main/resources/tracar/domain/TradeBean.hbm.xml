@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="tracar.domain">
+
+    <class name="TradeBean" table="TRADE">
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id> 
+
+        <many-to-one name="account" class="AccountBean"
+                    column="ACCOUNT_ID" />
+                    
+        <many-to-one name="product" class="ProductBean"
+                    column="PRODUCT_ID" />
+                    
+        <property name="tradeDate" column="TRADE_DATE" type="date"/>
+        
+        <property name="tradePrice" column="TRADE_PRICE" type="double"/>
+        
+        <property name="quantity" column="QUANTITY" type="int"/>
+                
+    </class>
+
+</hibernate-mapping>

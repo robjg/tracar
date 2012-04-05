@@ -1,0 +1,31 @@
+<oddjob>
+    <job>
+        <oddjob name="Shutdown Oddjob">
+            <properties>
+                <properties>
+                    <input>
+                        <resource resource='tracar.properties'/>
+                    </input>
+                </properties>
+            </properties>
+            <configuration>
+                <xml>
+                    <oddjob>
+                        <job>
+                            <sql>
+                                <connection>
+                                    <connection driver='${tracar.db.driver}'
+                                        password='${tracar.db.password}'
+                                        url='${tracar.db.url}' username='${tracar.db.user}'/>
+                                </connection>
+                                <input>
+                                    <buffer>shutdown</buffer>
+                                </input>
+                            </sql>
+                        </job>
+                    </oddjob>
+                </xml>
+            </configuration>
+        </oddjob>
+    </job>
+</oddjob>
