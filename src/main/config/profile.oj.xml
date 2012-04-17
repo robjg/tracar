@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <state:if xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check name="Check Profile Property" value="${tracar.profile.dir}"/>
+                        <state:flag name="Profile Given"/>
+                        <sequential>
+                            <jobs>
+                                <input name="Select Profile Directory">
+                                    <requests>
+                                        <input-text prompt="Profile Directory" property="selected.tracar.profile.dir"/>
+                                    </requests>
+                                </input>
+                                <properties>
+                                    <values>
+                                        <file file="${selected.tracar.profile.dir}" key="tracar.profile.dir"/>
+                                    </values>
+                                </properties>
+                            </jobs>
+                        </sequential>
+                    </jobs>
+                </state:if>
+                <exists file="${tracar.profile.dir}/tracar.properties" name="Check Valid Profile"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

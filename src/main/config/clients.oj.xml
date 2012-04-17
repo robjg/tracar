@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob>
+    <job>
+        <sequential>
+            <jobs>
+                <properties name="Load Tracar Properties File">
+                    <input>
+                        <resource resource="tracar.properties"/>
+                    </input>
+                </properties>
+                <jmx:client name="DateRoll" url="service:jmx:rmi:///jndi/rmi://${tracar.dateroll.server}:${tracar.dateroll.port}/jmxrmi" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <jmx:client name="Pretend Broker" url="service:jmx:rmi:///jndi/rmi://${tracar.pretendbroker.server}:${tracar.pretendbroker.port}/jmxrmi" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <jmx:client name="Trade Feed" url="service:jmx:rmi:///jndi/rmi://${tracar.tradefeed.server}:${tracar.tradefeed.port}/jmxrmi" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+                <jmx:client name="Trade Import" url="service:jmx:rmi:///jndi/rmi://${tracar.tradeimport.server}:${tracar.tradeimport.port}/jmxrmi" xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"/>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

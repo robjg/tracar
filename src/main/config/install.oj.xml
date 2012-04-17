@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/profile.oj.xml" inheritance="SHARED" name="Select Profile"/>
+                <oddjob file="${this.dir}/install_.oj.xml" id="main" name="Install Profile">
+                    <classLoader>
+                        <url-class-loader>
+                            <files>
+                                <file file="${tracar.profile.dir}"/>
+                            </files>
+                        </url-class-loader>
+                    </classLoader>
+                </oddjob>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Configuration"/>
+                <mkdir dir="${tracar.persist.dir}" name="Create Persist Dir"/>
+                <input name="Prompt For DB and/or Services">
+                    <requests>
+                        <input-message><![CDATA[You are about to install TraCaR for profile ${tracar.profile.dir}.
+
+Please choose what you would like to install.
+]]></input-message>
+                        <input-confirm default="false" prompt="Install DB" property="tracar.install.db"/>
+                        <input-confirm default="false" prompt="Install Services" property="tracar.install.services"/>
+                    </requests>
+                </input>
+                <state:if name="Install Database if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check name="Check Install DB" value="${tracar.install.db}"/>
+                        <oddjob file="${this.dir}/install/db/install-all.oj.xml" name="Install Database">
+                          <classLoader>
+                              <value value="${globalVars.tracarClassLoader}"/>
+                          </classLoader>
+                        </oddjob>
+                    </jobs>
+                </state:if>
+                <state:if name="Install Services if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check name="Check Install Services" value="${tracar.install.services}"/>
+                        <oddjob file="${this.dir}/install/services/install-services.oj.xml" name="Install Services"/>
+                    </jobs>
+                </state:if>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

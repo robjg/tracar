@@ -34,6 +34,8 @@ public class BusinessDateLoaderSpring implements Runnable, BusinessDate {
 		main.run();
 		
 		businessDate = (BusinessDate) main;
+		
+		context.close();
 	}
 
 	public Properties getProperties() {

@@ -1,0 +1,20 @@
+<oddjob id="this">
+  <job>
+    <sequential>
+      <jobs>
+        <oddjob file="${this.dir}/../shared.oj.xml" inheritance="SHARED"
+          name="Shared Configuration" />
+        <jmx:server xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"
+          id="server" name="Oddjob Server" root="${trade-import}" />
+        <oddjob id="trade-import" name="Trade Import Oddjobs" file="${this.dir}/TradeImportMain.oj.xml">
+          <classLoader>
+            <value value="${globalVars.tracarClassLoader}" />
+          </classLoader>
+          <persister>
+            <file-persister dir="${tracar.persist.dir}" />
+          </persister>
+        </oddjob>
+      </jobs>
+    </sequential>
+  </job>
+</oddjob>

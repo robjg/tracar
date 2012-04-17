@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <check name="Check Config Dir Given" value="${tracar.config.dir}"/>
+                <oddjob file="${this.dir}/install-service.oj.xml" name="Install Date Roll Service">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarDateRoll"/>
+                                <value key="server.config" value="${tracar.config.dir}/processes/DateRollServer.oj.xml"/>
+                                <value key="server.port" value="${tracar.dateroll.port}"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+                <oddjob file="${this.dir}/install-service.oj.xml" name="Install Pretend Broker">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarPretendBroker"/>
+                                <value key="server.config" value="${tracar.config.dir}/processes/PretendBrokerServer.oj.xml"/>
+                                <value key="server.port" value="${tracar.pretendbroker.port}"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+                <oddjob file="${this.dir}/install-service.oj.xml" name="Install Trade Feed">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarTradeFeed"/>
+                                <value key="server.config" value="${tracar.config.dir}/processes/TradeFeedServer.oj.xml"/>
+                                <value key="server.port" value="${tracar.tradefeed.port}"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+                <oddjob file="${this.dir}/install-service.oj.xml" name="Install Trade Import">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarTradeImport"/>
+                                <value key="server.config" value="${tracar.config.dir}/processes/TradeImportServer.oj.xml"/>
+                                <value key="server.port" value="${tracar.tradeimport.port}"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

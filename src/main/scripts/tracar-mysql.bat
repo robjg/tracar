@@ -12,7 +12,7 @@ set JAVA_CMD="%JAVA_HOME%"\bin\java
 
 :launch
 
-%JAVA_CMD% "-Dtracar.home=%TRACAR_HOME%" -jar "%ODDJOB_HOME%"\run-oddjob.jar -cp "%TRACAR_HOME%"\profiles\hsqlm "%TRACAR_HOME%"\config\all.oj.xml
+%JAVA_CMD% "-Dtracar.home=%TRACAR_HOME%" -jar "%ODDJOB_HOME%"\run-oddjob.jar -cp "%TRACAR_HOME%"\profiles\mysql "%TRACAR_HOME%"\config\clients.oj.xml
 
 exit /b %errorlevel%
 

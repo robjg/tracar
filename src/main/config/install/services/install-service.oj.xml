@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <check name="Check Service Name Given" value="${service.name}"/>
+                <check name="Check Server Config Given" value="${server.config}"/>
+                <check name="Check Port Given" value="${server.port}"/>
+                <check name="Check Profile Given" value="${tracar.profile.dir}"/>
+                <exists file="${tracar.bin.dir}/JavaService${sun.arch.data.model}.exe" id="java-service" name="Check Java Service Exe for Arch Type"/>
+                <properties name="Service Properties">
+                    <values>
+                        <file file="${java-service.file}" key="javaservice.exe"/>
+                        <file file="${oddjob.home}\run-oddjob.jar" key="oddjob.runjar"/>
+                        <file file="${tracar.home}" key="service.working.dir"/>
+                        <file file="${java.home}\bin\server\jvm.dll" key="java.dll"/>
+                        <file file="${tracar.config.dir}/log4j.properties" key="tracar.server.log4j"/>
+                    </values>
+                </properties>
+                <exec name="Install Service"><![CDATA["${javaservice.exe}"
+-install ${service.name}
+"${java.dll}" 
+"-Djava.class.path=${oddjob.runjar}"
+"-Dtracar.home=${tracar.home}"
+-Dcom.sun.management.jmxremote.port=${server.port}
+-Dcom.sun.management.jmxremote.ssl=false
+-Dcom.sun.management.jmxremote.authenticate=false
+-start org.oddjob.launch.Launcher 
+-params -cp ${tracar.profile.dir} -l ${tracar.server.log4j} -f ${server.config}
+-out ${service.name}.log
+-err ${service.name}.log
+-current "${service.working.dir}"
+-description "Tracar Service ${service.name}"]]></exec>
+                <exec name="Start Service"><![CDATA[cmd /c net start ${service.name}]]></exec>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

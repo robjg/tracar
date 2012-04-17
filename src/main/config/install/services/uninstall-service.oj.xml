@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <check name="Check Service Name Given" value="${service.name}"/>
+                <state:if name="Ignore if Not Running" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <exec name="Stop Service"><![CDATA[cmd /c net stop ${service.name}]]></exec>
+                    </jobs>
+                </state:if>
+                <exists file="${tracar.bin.dir}/JavaService${sun.arch.data.model}.exe" id="java-service" name="Check Java Service Exe for Arch Type"/>
+                <properties name="Service Properties">
+                    <values>
+                        <file file="${java-service.file}" key="javaservice.exe"/>
+                    </values>
+                </properties>
+                <exec><![CDATA["${javaservice.exe}"
+-uninstall ${service.name}]]></exec>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

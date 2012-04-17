@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Data Source Setup"/>
+                <sql expandProperties="true" name="Drop Tracar Schema">
+                    <connection>
+                        <value value="${dataSource.connection}"/>
+                    </connection>
+                    <input>
+                        <file file="${tracar.db.install.dir}/drop.ddl"/>
+                    </input>
+                </sql>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

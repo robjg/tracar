@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Configuration"/>
+                <input name="Prompt For DB and/or Services">
+                    <requests>
+                        <input-message><![CDATA[You are about to uninstall TraCaR for profile ${tracar.profile.dir}.
+
+Please choose what you would like to uninstall.
+]]></input-message>
+                        <input-confirm default="false" prompt="Remove Persistance Dir" property="tracar.uninstall.persist"/>
+                        <input-confirm default="false" prompt="Uninstall DB" property="tracar.uninstall.db"/>
+                        <input-confirm default="false" prompt="Uninstall Services" property="tracar.uninstall.services"/>
+                    </requests>
+                </input>
+                <state:if name="Remove Persister Dir if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check name="Check Remove Persist" value="${tracar.uninstall.persist}"/>
+                        <delete force="true" name="Delete Persist Dir">
+                            <files>
+                                <file file="${tracar.persist.dir}"/>
+                            </files>
+                        </delete>
+                    </jobs>
+                </state:if>
+                <state:if name="Uninstall Database if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check name="Check Install DB" value="${tracar.uninstall.db}"/>
+                        <oddjob file="${this.dir}/install/db/uninstall.oj.xml" name="Uninstall Database">
+                            <classLoader>
+                                <value value="${globalVars.tracarClassLoader}"/>
+                            </classLoader>
+                        </oddjob>
+                    </jobs>
+                </state:if>
+                <state:if name="Uninstall Services if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check name="Check Uninstall Services" value="${tracar.uninstall.services}"/>
+                        <oddjob file="${this.dir}/install/services/uninstall-services.oj.xml" name="Uninstall Services"/>
+                    </jobs>
+                </state:if>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

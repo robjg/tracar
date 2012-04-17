@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/uninstall-service.oj.xml" name="Uninstall Date Roll Service">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarDateRoll"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+                <oddjob file="${this.dir}/uninstall-service.oj.xml" name="Uninstall Pretend Broker Service">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarPretendBroker"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+                <oddjob file="${this.dir}/uninstall-service.oj.xml" name="Uninstall Trade Feed Service">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarTradeFeed"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+                <oddjob file="${this.dir}/uninstall-service.oj.xml" name="Uninstall Trade Import Service">
+                    <properties>
+                        <properties>
+                            <values>
+                                <value key="service.name" value="TracarTradeImport"/>
+                            </values>
+                        </properties>
+                    </properties>
+                </oddjob>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

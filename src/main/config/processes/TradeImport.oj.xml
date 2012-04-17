@@ -11,11 +11,22 @@
                         <sequential>
                             <jobs>
                                 <bean class="tracar.feeds.TradeImportSpring"/>
-                                <scheduling:trigger on="${trade-feed}">
+                                <scheduling:retry>
+                                    <schedule>
+                                        <schedules:count count="3" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+                                            <refinement>
+                                                <schedules:interval interval="00:03"/>
+                                            </refinement>
+                                        </schedules:count>
+                                    </schedule>
                                     <job>
-                                        <state:flag xmlns:state="http://rgordon.co.uk/oddjob/state"/>
+                                        <scheduling:trigger on="${trade-feed-lookup/trade-feed/file-loader}">
+                                            <job>
+                                                <state:flag xmlns:state="http://rgordon.co.uk/oddjob/state"/>
+                                            </job>
+                                        </scheduling:trigger>
                                     </job>
-                                </scheduling:trigger>
+                                </scheduling:retry>
                             </jobs>
                         </sequential>
                     </job>

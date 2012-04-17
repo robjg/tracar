@@ -3,7 +3,37 @@
     <job>
         <sequential>
             <jobs>
-                <bean class="tracar.dates.RollBusinessDateSpring"/>
+                <scheduling:timer xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+                    <schedule>
+                        <schedules:daily xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
+                    </schedule>
+                    <job>
+                        <scheduling:retry id="dateroll-retry">
+                            <schedule>
+                                <schedules:count count="3" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules">
+                                    <refinement>
+                                        <schedules:interval interval="00:01"/>
+                                    </refinement>
+                                </schedules:count>
+                            </schedule>
+                            <job>
+                                <bean class="tracar.dates.RollBusinessDateSpring"/>
+                            </job>
+                        </scheduling:retry>
+                    </job>
+                </scheduling:timer>
+                <scheduling:timer skipMissedRuns="true" xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+                    <schedule>
+                        <schedules:interval interval="01:00" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
+                    </schedule>
+                    <job>
+                        <scheduling:trigger on="${dateroll-retry}">
+                            <job>
+                                <mail:send from="${my.alert.from}" host="${my.mailhost}" id="exception" name="Send alert mail" subject="Date Role Failed" to="${my.alert.to}" xmlns:mail="http://rgordon.co.uk/oddjob/mail"><![CDATA[Date Roll Failed]]></mail:send>
+                            </job>
+                        </scheduling:trigger>
+                    </job>
+                </scheduling:timer>
                 <folder name="Useful Queries">
                     <jobs>
                         <sql expandProperties="true" name="Business Date Query">

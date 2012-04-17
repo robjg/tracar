@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+  <job>
+    <sequential>
+      <jobs>
+        <scheduling:retry xmlns:scheduling="http://rgordon.co.uk/oddjob/scheduling">
+          <schedule>
+            <schedules:interval interval="00:03" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
+          </schedule>
+          <job>
+            <jmx:client id="trade-feed-lookup" name="Trade Feed Lookup"
+              url="service:jmx:rmi:///jndi/rmi://${tracar.tradefeed.server}:${tracar.tradefeed.port}/jmxrmi"
+              xmlns:jmx="http://rgordon.co.uk/oddjob/jmx" />
+          </job>
+        </scheduling:retry>
+        <oddjob file="${this.dir}/TradeImport.oj.xml"
+          id="trade-import" name="Trade Import">
+          <export>
+            <value key="trade-feed-lookup" value="${trade-feed-lookup}" />
+          </export>
+        </oddjob>
+      </jobs>
+    </sequential>
+  </job>
+</oddjob>

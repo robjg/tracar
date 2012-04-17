@@ -29,6 +29,8 @@ public class RollBusinessDateSpring implements Runnable {
 		Runnable main = context.getBean("rollBusinessDate", Runnable.class);
 		
 		main.run();
+		
+		context.close();
 	}
 
 	public Properties getProperties() {

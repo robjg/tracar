@@ -1,0 +1,19 @@
+<oddjob id="this">
+  <job>
+    <sequential>
+      <jobs>
+        <exists id="server-config" name="Check Server Config Exists"
+          file="${this.args[0]}" />
+        <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED"
+          name="Shared Configuration" />
+        <jmx:server xmlns:jmx="http://rgordon.co.uk/oddjob/jmx"
+          id="server" name="Oddjob Server" root="${server-jobs}" />
+        <oddjob id="server-jobs" name="Server Jobs" file="${server-config.file}">
+          <classLoader>
+            <value value="${globalVars.tracarClassLoader}" />
+          </classLoader>
+        </oddjob>
+      </jobs>
+    </sequential>
+  </job>
+</oddjob>

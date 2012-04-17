@@ -3,7 +3,7 @@
     <job>
         <sequential>
             <jobs>
-                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Data Source Setup"/>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Data Source Setup"/>
                 <sql expandProperties="true" name="Create Schema">
                     <connection>
                         <value value="${dataSource.connection}"/>

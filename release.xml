@@ -5,7 +5,7 @@
             <jobs>
                 <exec dir="${this.dir}" name="Maven Clean"><![CDATA[cmd /c mvn clean]]></exec>
                 <exec dir="${this.dir}" name="Maven Package"><![CDATA[cmd /c mvn install]]></exec>
-                <properties>
+                <properties id="props">
                     <values>
                         <value key="project.name" value="tracar"/>
                         <value key="project.version" value="1.0-SNAPSHOT"/>
@@ -14,65 +14,69 @@
                         <file file="${this.dir}/target/${project.full.name}-src.zip" key="dist.src.zip.file"/>
                     </values>
                 </properties>
-                <ant id="send-bin" name="Send Bin Zip">
-                    <tasks>
-                        <xml>
-                            <tasks>
-                                <scp file="${dist.bin.zip.file}" sftp="true" todir="${sourceforge.user},ojob:${sourceforge.password}@${sourceforge.server}:/home/pfs/project/t/tr/tracar/snapshots" trust="true"/>
-                            </tasks>
-                        </xml>
-                    </tasks>
-                    <classLoader>
-                        <url-class-loader>
-                            <files>
-                                <files files="${ant.optionals.dir}/*.jar"/>
-                            </files>
-                            <parent>
-                                <value value="${send-bin.class.classLoader}"/>
-                            </parent>
-                        </url-class-loader>
-                    </classLoader>
-                </ant>
-                <ant id="send-src" name="Send Src Zip">
-                    <tasks>
-                        <xml>
-                            <tasks>
-                                <scp file="${dist.src.zip.file}" sftp="true" todir="${sourceforge.user},ojob:${sourceforge.password}@${sourceforge.server}:/home/pfs/project/t/tr/tracar/snapshots" trust="true"/>
-                            </tasks>
-                        </xml>
-                    </tasks>
-                    <classLoader>
-                        <url-class-loader>
-                            <files>
-                                <files files="${ant.optionals.dir}/*.jar"/>
-                            </files>
-                            <parent>
-                                <value value="${send-src.class.classLoader}"/>
-                            </parent>
-                        </url-class-loader>
-                    </classLoader>
-                </ant>
-                <ant id="send-readme" name="Send Readme">
-                    <tasks>
-                        <xml>
-                            <tasks>
-                                <scp file="${this.dir}/README.txt" sftp="true" todir="${sourceforge.user},ojob:${sourceforge.password}@${sourceforge.server}:/home/pfs/project/t/tr/tracar/snapshots" trust="true"/>
-                            </tasks>
-                        </xml>
-                    </tasks>
-                    <classLoader>
-                        <url-class-loader>
-                            <files>
-                                <files files="${ant.optionals.dir}/*.jar"/>
-                            </files>
-                            <parent>
-                                <value value="${send-readme.class.classLoader}"/>
-                            </parent>
-                        </url-class-loader>
-                    </classLoader>
-                </ant>
                 <folder>
                     <jobs>
+                        <sequential name="Send to Sourceforge">
+                            <jobs>
+                                <ant id="send-bin" name="Send Bin Zip">
+                                    <tasks>
+                                        <xml>
+                                            <tasks>
+                                                <scp file="${dist.bin.zip.file}" sftp="true" todir="${sourceforge.user},ojob:${sourceforge.password}@${sourceforge.server}:/home/pfs/project/t/tr/tracar/snapshots" trust="true"/>
+                                            </tasks>
+                                        </xml>
+                                    </tasks>
+                                    <classLoader>
+                                        <url-class-loader>
+                                            <files>
+                                                <files files="${ant.optionals.dir}/*.jar"/>
+                                            </files>
+                                            <parent>
+                                                <value value="${send-bin.class.classLoader}"/>
+                                            </parent>
+                                        </url-class-loader>
+                                    </classLoader>
+                                </ant>
+                                <ant id="send-src" name="Send Src Zip">
+                                    <tasks>
+                                        <xml>
+                                            <tasks>
+                                                <scp file="${dist.src.zip.file}" sftp="true" todir="${sourceforge.user},ojob:${sourceforge.password}@${sourceforge.server}:/home/pfs/project/t/tr/tracar/snapshots" trust="true"/>
+                                            </tasks>
+                                        </xml>
+                                    </tasks>
+                                    <classLoader>
+                                        <url-class-loader>
+                                            <files>
+                                                <files files="${ant.optionals.dir}/*.jar"/>
+                                            </files>
+                                            <parent>
+                                                <value value="${send-src.class.classLoader}"/>
+                                            </parent>
+                                        </url-class-loader>
+                                    </classLoader>
+                                </ant>
+                                <ant id="send-readme" name="Send Readme">
+                                    <tasks>
+                                        <xml>
+                                            <tasks>
+                                                <scp file="${this.dir}/README.txt" sftp="true" todir="${sourceforge.user},ojob:${sourceforge.password}@${sourceforge.server}:/home/pfs/project/t/tr/tracar/snapshots" trust="true"/>
+                                            </tasks>
+                                        </xml>
+                                    </tasks>
+                                    <classLoader>
+                                        <url-class-loader>
+                                            <files>
+                                                <files files="${ant.optionals.dir}/*.jar"/>
+                                            </files>
+                                            <parent>
+                                                <value value="${send-readme.class.classLoader}"/>
+                                            </parent>
+                                        </url-class-loader>
+                                    </classLoader>
+                                </ant>
+                            </jobs>
+                        </sequential>
                         <exec dir="${this.dir}" name="Maven Assembly"><![CDATA[cmd /c mvn assembly:single]]></exec>
                     </jobs>
                 </folder>

@@ -24,9 +24,23 @@
                         <file-persister dir="${tracar.persist.dir}"/>
                     </persister>
                 </oddjob>
+                <oddjob id="trade-feed-lookup" name="Trade Feed Lookup">
+                    <configuration>
+                        <xml>
+                            <oddjob>
+                                <job>
+                                    <state:flag xmlns:state="http://rgordon.co.uk/oddjob/state"/>
+                                </job>
+                            </oddjob>
+                        </xml>
+                    </configuration>
+                    <export>
+                        <value key="trade-feed" value="${trade-feed}"/>
+                    </export>
+                </oddjob>
                 <oddjob file="${this.dir}/processes/TradeImport.oj.xml" id="trade-import" name="Trade Import">
                     <export>
-                        <value key="trade-feed" value="${trade-feed/file-loader}"/>
+                        <value key="trade-feed-lookup" value="${trade-feed-lookup}"/>
                     </export>
                     <persister>
                         <file-persister dir="${tracar.persist.dir}"/>
