@@ -7,6 +7,7 @@
                     <jobs>
                         <mkdir dir="${tracar.persist.dir}" name="Create Persist Dir"/>
                         <oddjob file="${this.dir}/install/db/install-all.oj.xml" name="Install DB Oddjob"/>
+                        <oddjob file="${this.dir}\install\db\install-sample.oj.xml" name="Install Sample Data"/>
                     </jobs>
                 </sequential>
                 <oddjob file="${this.dir}/processes/DateRoll.oj.xml" id="date-roll" name="Date Roll">
@@ -29,7 +30,7 @@
                         <xml>
                             <oddjob>
                                 <job>
-                                    <state:flag xmlns:state="http://rgordon.co.uk/oddjob/state"/>
+                                    <state:flag name="A Flag to Ensure Oddjob Completes" xmlns:state="http://rgordon.co.uk/oddjob/state"/>
                                 </job>
                             </oddjob>
                         </xml>

@@ -1,1 +1,1 @@
-drop schema TRACAR;
+drop schema ${tracar.db.schema};

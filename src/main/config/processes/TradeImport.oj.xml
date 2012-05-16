@@ -20,7 +20,7 @@
                                         </schedules:count>
                                     </schedule>
                                     <job>
-                                        <scheduling:trigger on="${trade-feed-lookup/trade-feed/file-loader}">
+                                        <scheduling:trigger newOnly="true" on="${trade-feed-lookup/trade-feed/file-loader}">
                                             <job>
                                                 <state:flag xmlns:state="http://rgordon.co.uk/oddjob/state"/>
                                             </job>

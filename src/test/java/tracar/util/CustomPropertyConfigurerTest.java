@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 
 public class CustomPropertyConfigurerTest {
@@ -23,8 +24,15 @@ public class CustomPropertyConfigurerTest {
 					"tracar/util/CustomPropertyConfigurerTest1.spg.xml"},
 				false);
 
-		context.addBeanFactoryPostProcessor(
-				new CustomPropertyConfigurer(properties));
+		PropertySourcesPlaceholderConfigurer configurer =
+				new PropertySourcesPlaceholderConfigurer();
+		configurer.setProperties(properties);
+		configurer.setIgnoreUnresolvablePlaceholders(true);
+		
+		context.addBeanFactoryPostProcessor(configurer);
+		
+//		context.addBeanFactoryPostProcessor(
+//				new CustomPropertyConfigurer(properties));
 		context.refresh();
 		
 		SomeBean results = context.getBean(SomeBean.class);

@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<oddjob>
+<oddjob id="this">
     <job>
         <sequential>
             <jobs>
                 <state:if xmlns:state="http://rgordon.co.uk/oddjob/state">
                     <jobs>
-                        <check name="Check Profile Property" value="${tracar.profile.dir}"/>
-                        <state:flag name="Profile Given"/>
-                        <sequential>
-                            <jobs>
-                                <input name="Select Profile Directory">
-                                    <requests>
-                                        <input-text prompt="Profile Directory" property="selected.tracar.profile.dir"/>
-                                    </requests>
-                                </input>
-                                <properties>
-                                    <values>
-                                        <file file="${selected.tracar.profile.dir}" key="tracar.profile.dir"/>
-                                    </values>
-                                </properties>
-                            </jobs>
-                        </sequential>
+                        <check name="Check Profile Property" null="true" value="${tracar.profile.dir}"/>
+                        <input name="Select Profile Directory">
+                            <requests>
+                                <input-file currentDirectory="${this.dir}/../profiles" prompt="Profile Directory" property="tracar.profile.dir" selectionMode="DIRECTORY"/>
+                            </requests>
+                        </input>
                     </jobs>
                 </state:if>
                 <exists file="${tracar.profile.dir}/tracar.properties" name="Check Valid Profile"/>

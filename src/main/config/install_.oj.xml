@@ -3,31 +3,39 @@
     <job>
         <sequential>
             <jobs>
-                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Configuration"/>
-                <mkdir dir="${tracar.persist.dir}" name="Create Persist Dir"/>
                 <input name="Prompt For DB and/or Services">
                     <requests>
                         <input-message><![CDATA[You are about to install TraCaR for profile ${tracar.profile.dir}.
 
 Please choose what you would like to install.
 ]]></input-message>
+                        <input-confirm default="false" prompt="Create Persist Dir\n${tracar.persist.dir}" property="tracar.install.persist.dir"/>
                         <input-confirm default="false" prompt="Install DB" property="tracar.install.db"/>
+                        <input-confirm default="false" prompt="Install Sample Data" property="tracar.install.sample.data"/>
                         <input-confirm default="false" prompt="Install Services" property="tracar.install.services"/>
                     </requests>
                 </input>
+                <state:if name="Create Persist Dir if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check eq="true" name="Check Create Persist Dir" value="${tracar.install.persist.dir}"/>
+                        <mkdir dir="${tracar.persist.dir}" name="Create Persist Dir"/>
+                    </jobs>
+                </state:if>
                 <state:if name="Install Database if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
                     <jobs>
-                        <check name="Check Install DB" value="${tracar.install.db}"/>
-                        <oddjob file="${this.dir}/install/db/install-all.oj.xml" name="Install Database">
-                          <classLoader>
-                              <value value="${globalVars.tracarClassLoader}"/>
-                          </classLoader>
-                        </oddjob>
+                        <check eq="true" name="Check Install DB" value="${tracar.install.db}"/>
+                        <oddjob file="${this.dir}/install/db/install-all.oj.xml" name="Install Database"/>
+                    </jobs>
+                </state:if>
+                <state:if name="Install Sample Data if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
+                    <jobs>
+                        <check eq="true" name="Check Install Sample Data" value="${tracar.install.sample.data}"/>
+                        <oddjob file="${this.dir}\install\db\install-sample.oj.xml" name="Install Sample Data"/>
                     </jobs>
                 </state:if>
                 <state:if name="Install Services if required" xmlns:state="http://rgordon.co.uk/oddjob/state">
                     <jobs>
-                        <check name="Check Install Services" value="${tracar.install.services}"/>
+                        <check eq="true" name="Check Install Services" value="${tracar.install.services}"/>
                         <oddjob file="${this.dir}/install/services/install-services.oj.xml" name="Install Services"/>
                     </jobs>
                 </state:if>

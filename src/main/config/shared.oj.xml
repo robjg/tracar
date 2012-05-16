@@ -16,9 +16,9 @@
                         <file file="${tracar.app}/bin" key="tracar.bin.dir"/>
                         <file file="${tracar.app}/lib" key="tracar.lib.dir"/>
                         <file file="${tracar.home}/config" key="tracar.config.dir"/>
-                        <file file="${tracar.home}/work" key="tracar.work.dir"/>
-                        <file file="${tracar.work.dir}/feeds" key="tracar.feed.dir"/>
-                        <file file="${tracar.home}/persist" key="tracar.persist.dir"/>
+                        <file file="${tracar.home}/data" key="tracar.data"/>
+                        <file file="${tracar.data}/feeds" key="tracar.feed.dir"/>
+                        <file file="${tracar.data}/persist" key="tracar.persist.dir"/>
                     </values>
                 </properties>
                 <variables id="globalVars">

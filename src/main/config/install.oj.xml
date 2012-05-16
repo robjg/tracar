@@ -4,13 +4,18 @@
         <sequential>
             <jobs>
                 <oddjob file="${this.dir}/profile.oj.xml" inheritance="SHARED" name="Select Profile"/>
-                <oddjob file="${this.dir}/install_.oj.xml" id="main" name="Install Profile">
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Shared Configuration">
                     <classLoader>
                         <url-class-loader>
                             <files>
-                                <file file="${tracar.profile.dir}"/>
+                                <value value="${tracar.profile.dir}"/>
                             </files>
                         </url-class-loader>
+                    </classLoader>
+                </oddjob>
+                <oddjob file="${this.dir}/install_.oj.xml" id="main" name="Install Profile">
+                    <classLoader>
+                        <value value="${globalVars.tracarClassLoader}"/>
                     </classLoader>
                 </oddjob>
             </jobs>

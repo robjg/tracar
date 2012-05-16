@@ -27,7 +27,7 @@
                         <schedules:interval interval="01:00" xmlns:schedules="http://rgordon.co.uk/oddjob/schedules"/>
                     </schedule>
                     <job>
-                        <scheduling:trigger on="${dateroll-retry}">
+                        <scheduling:trigger newOnly="true" on="${dateroll-retry}" state="EXCEPTION">
                             <job>
                                 <mail:send from="${my.alert.from}" host="${my.mailhost}" id="exception" name="Send alert mail" subject="Date Role Failed" to="${my.alert.to}" xmlns:mail="http://rgordon.co.uk/oddjob/mail"><![CDATA[Date Roll Failed]]></mail:send>
                             </job>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oddjob id="this">
+    <job>
+        <sequential>
+            <jobs>
+                <oddjob file="${this.dir}/shared.oj.xml" inheritance="SHARED" name="Data Source Setup"/>
+                <oddjob file="${this.dir}/standing.oj.xml" name="Install Sample Standing Data">
+                    <export>
+                        <value key="dataSource" value="${dataSource}"/>
+                    </export>
+                </oddjob>
+            </jobs>
+        </sequential>
+    </job>
+</oddjob>

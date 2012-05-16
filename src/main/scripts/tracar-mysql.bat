@@ -4,6 +4,8 @@ if "%ODDJOB_HOME%"=="" goto noOddjobHome
 if NOT "%TRACAR_HOME%"=="" goto checkJava
 set TRACAR_HOME=%~dp0..
 
+set TRACAR_PROFILE=%TRACAR_HOME%\profiles\mysql
+
 :checkJava
 
 set JAVA_CMD=java
@@ -12,7 +14,7 @@ set JAVA_CMD="%JAVA_HOME%"\bin\java
 
 :launch
 
-%JAVA_CMD% "-Dtracar.home=%TRACAR_HOME%" -jar "%ODDJOB_HOME%"\run-oddjob.jar -cp "%TRACAR_HOME%"\profiles\mysql "%TRACAR_HOME%"\config\clients.oj.xml
+%JAVA_CMD% "-Dtracar.home=%TRACAR_HOME%" -jar "%ODDJOB_HOME%"\run-oddjob.jar -cp "%TRACAR_PROFILE%" "%TRACAR_HOME%"\config\clients.oj.xml
 
 exit /b %errorlevel%
 
