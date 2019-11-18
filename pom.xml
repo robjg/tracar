@@ -11,7 +11,7 @@
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
     <lib.dir>${project.build.directory}/lib</lib.dir>
     <spring.framework.version>3.1.1.RELEASE</spring.framework.version>
-    <spring.batch.version>2.1.8.RELEASE</spring.batch.version>
+    <spring.batch.version>4.2.0.RELEASE</spring.batch.version>
     <hibernate.version>4.1.0.Final</hibernate.version>
     <hsql.version>2.2.8</hsql.version>
     <mysql.version>5.1.18</mysql.version>
