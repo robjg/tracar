@@ -12,7 +12,7 @@
     <lib.dir>${project.build.directory}/lib</lib.dir>
     <spring.framework.version>3.1.1.RELEASE</spring.framework.version>
     <spring.batch.version>2.1.8.RELEASE</spring.batch.version>
-    <hibernate.version>4.1.0.Final</hibernate.version>
+    <hibernate.version>5.4.24.Final</hibernate.version>
     <hsql.version>2.2.8</hsql.version>
     <mysql.version>5.1.18</mysql.version>
     <log4j.version>1.2.16</log4j.version>
